@@ -66,14 +66,6 @@
 			<version>${taglibs.standard.version}</version>
 		</dependency>
 
-		<!-- This should be transitively imported and will be removed if testing proves that out
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>${slf4j-api.version}</version>
-</dependency>
--->
-
 		<!-- Logging solution -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
