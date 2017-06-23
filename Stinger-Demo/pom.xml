@@ -23,6 +23,7 @@
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<taglibs.standard.version>1.1.2</taglibs.standard.version>
+		<logback-classic.version>1.2.3</logback-classic.version>
 	</properties>
 
 
@@ -63,6 +64,21 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>${taglibs.standard.version}</version>
+		</dependency>
+
+		<!-- This should be transitively imported and will be removed if testing proves that out
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>${slf4j-api.version}</version>
+</dependency>
+-->
+
+		<!-- Logging solution -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
 		</dependency>
 
 	</dependencies>
