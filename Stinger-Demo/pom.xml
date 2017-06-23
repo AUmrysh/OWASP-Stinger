@@ -1,0 +1,149 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.owasp</groupId>
+	<artifactId>stinger-demo</artifactId>
+	<version>2.6.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>OWASP Stinger Test Application</name>
+	<description>OWASP Stinger is a regex based java filter that parses various input fields to help protect against XSS and SQLi attacks</description>
+	<url>https://www.owasp.org/index.php/OWASP_Stinger_Version_2</url>
+	<organization>
+		<name>OWASP</name>
+		<url>http://www.owasp.org</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>LGPL License</name>
+			<url>https://www.gnu.org/licenses/lgpl-3.0.en.html</url>
+		</license>
+	</licenses>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<servlet-api.version>2.5</servlet-api.version>
+		<jsp-api.version>2.1</jsp-api.version>
+		<jstl.version>1.2</jstl.version>
+		<taglibs.standard.version>1.1.2</taglibs.standard.version>
+	</properties>
+
+
+	<dependencies>
+
+		<!-- Enables the use of java servlets -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Enables the use of jsps with the servlets -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Imports the module we are demoing -->
+		<dependency>
+			<groupId>org.owasp.stinger</groupId>
+			<artifactId>OWASP-Stinger</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Enables the usage of jstl tags inside jsps -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+
+		<!-- Adds the standard libraries of tags for jstl -->
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>${taglibs.standard.version}</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+
+				<!-- Used to compile the application -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<fork>true</fork>
+					<optimize>true</optimize>
+					<showDeprecation>true</showDeprecation>
+					<source>1.8</source>
+					<target>1.8</target>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+
+			<!-- Used to create Jars of the application -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<Project-Lead>Eric Sheridan (eric@infraredsecurity.com)</Project-Lead>
+							<Url>${project.url}</Url>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- To be determined if necessary
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<id>javadoc-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+
+			<!-- Execute Unit Tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- Allow for quickly standing up a testing web app -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<path>/</path>
+					<port>8000</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+    <display-name>OWASP Stinger Test</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+    <filter>
+        <filter-name>Stinger</filter-name>
+        <filter-class>org.owasp.stinger.StingerFilter</filter-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>stinger.xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>error-page</param-name>
+            <param-value>error.html</param-value>
+        </init-param>
+
+        <!-- Set to true while testing, false when in prod -->
+        <init-param>
+            <param-name>reload</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>Stinger</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <description>StingerServlet</description>
+        <display-name>StingerServlet</display-name>
+        <servlet-name>StingerServlet</servlet-name>
+        <servlet-class>org.owasp.stinger.StingerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StingerServlet</servlet-name>
+        <url-pattern>/StingerServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
