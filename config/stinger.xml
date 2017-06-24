@@ -52,14 +52,18 @@ the Stinger project lead at eric.sheridan@owasp.org
 			<pattern>
 				^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&amp;=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$
 			</pattern>
-			<description></description>
+			<description>
+				Generic URL of multiple types
+			</description>
 		</regex>
 		<regex>
 			<name>email</name>
 			<pattern>
 				^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$
 			</pattern>
-			<description></description>
+			<description>
+				Basic email format of 'user @ domain'
+			</description>
 		</regex>
 		<regex>
 			<name>safetext</name>
