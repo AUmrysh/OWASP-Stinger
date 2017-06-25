@@ -36,7 +36,7 @@ public class Rule {
 	
 	private Pattern pattern = null;
 	
-	private List<String> exclude = new LinkedList<String>();
+	private List<String> exclude = new LinkedList<>();
 	
 	private Category missing = null;
 	

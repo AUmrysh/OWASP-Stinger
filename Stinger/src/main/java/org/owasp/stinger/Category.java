@@ -37,7 +37,7 @@ public class Category {
 	
 	private Severity severity = null;
 	
-	private List<AbstractAction> actions = new LinkedList<AbstractAction>();
+	private List<AbstractAction> actions = new LinkedList<>();
 	
 	private Category() {
 		

@@ -62,16 +62,16 @@ public class RuleSet {
 	private ServletContext context = null;
 
 	/** The exclude-set which no protection will be applied **/
-	private List<Pattern> excludeSet = new LinkedList<Pattern>();
+	private List<Pattern> excludeSet = new LinkedList<>();
 
 	/** Double-Map of all parameter rules for a particular URI **/
-	private Map<Pattern, Map<String, Rule>> pRules = new HashMap<Pattern, Map<String, Rule>>();
+	private Map<Pattern, Map<String, Rule>> pRules = new HashMap<>();
 
 	/** Map of all cookie rules **/
-	private Map<String, CookieRule> cRules = new HashMap<String, CookieRule>();
+	private Map<String, CookieRule> cRules = new HashMap<>();
 
 	/** Map of all regular expressions **/
-	private Map<String, String> regexs = new HashMap<String, String>();
+	private Map<String, String> regexs = new HashMap<>();
 
 	private Document parseXmlFile(String fileName) {
 		Document doc = null;
@@ -369,7 +369,7 @@ public class RuleSet {
 			if (child.getNodeType() == Node.ELEMENT_NODE) {
 				Element ruleSet = (Element) child;
 				Pattern path = getPath(ruleSet);
-				HashMap<String, Rule> rules = new HashMap<String, Rule>();
+				HashMap<String, Rule> rules = new HashMap<>();
 
 				NodeList children = ruleSet.getElementsByTagName("rule");
 
@@ -504,7 +504,7 @@ public class RuleSet {
 			if (p.matcher(uri).matches()) {
 				//prevent overwriting of other rules when multiple uri patterns match
 				if(rules == null){
-                    rules = new HashMap<String,Rule>();
+                    rules = new HashMap<>();
                 }
                 rules.putAll(pRules.get(p));
 			}
@@ -521,7 +521,7 @@ public class RuleSet {
 		Rule rule = null;
 
 		uriRules = getRules(uri);
-		result = new LinkedList<Rule>();
+		result = new LinkedList<>();
 
 		if (uriRules != null) {
 			itr = uriRules.keySet().iterator();
@@ -554,7 +554,7 @@ public class RuleSet {
 		Iterator itr = null;
 		String name = null;
 
-		result = new LinkedList<CookieRule>();
+		result = new LinkedList<>();
 		itr = cRules.keySet().iterator();
 
 		while (itr.hasNext()) {
@@ -585,8 +585,8 @@ public class RuleSet {
 			}
 		}
 
-		if (isSet == false) {
-			ruleSet = new HashMap<String, Rule>();
+		if (!isSet) {
+			ruleSet = new HashMap<>();
 			ruleSet.put(newRule.getName(), newRule);
 			pRules.put(Pattern.compile(uri), ruleSet);
 		}

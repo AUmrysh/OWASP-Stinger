@@ -38,7 +38,7 @@ public abstract class AbstractAction {
 	
 	public static final int PROCESS = 1;
 	
-	private HashMap<String, String> parameters = new HashMap<String, String>();
+	private HashMap<String, String> parameters = new HashMap<>();
 	
 	public String getParameter(String name) {
 		return parameters.get(name);
