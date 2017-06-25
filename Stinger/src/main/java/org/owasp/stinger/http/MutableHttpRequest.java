@@ -43,13 +43,13 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 	
 	private HttpServletRequest request = null;
 	
-	private Map<String, LinkedList<String>> headers = new HashMap<String, LinkedList<String>>();
+	private Map<String, LinkedList<String>> headers = new HashMap<>();
 	private Set<String> origHeaderNamesSet = new HashSet<>();
 	
 	private Map<String, Cookie> cookies = new HashMap<String, Cookie>();
 	
-//	private Map<String, String> parameters = new HashMap<String, String>();
-    private Map<String, String[]> parameters = new HashMap<String, String[]>();
+//	private Map<String, String> parameters = new HashMap<>();
+    private Map<String, String[]> parameters = new HashMap<>();
 
 	
 	public MutableHttpRequest(HttpServletRequest request) {
@@ -113,7 +113,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 	}
 	
 	public void clearParameters() {
-		parameters = new HashMap<String, String[]>();
+		parameters = new HashMap<>();
 	}
 	
 	public Map getParameterMap() {
@@ -191,7 +191,7 @@ public class MutableHttpRequest extends HttpServletRequestWrapper {
 		if(values != null) {
 			values.add(value);
 		} else {
-			values = new LinkedList<String>();
+			values = new LinkedList<>();
 			values.add(value);
 			headers.put(lowerName, values);
 			origHeaderNamesSet.add(name);
