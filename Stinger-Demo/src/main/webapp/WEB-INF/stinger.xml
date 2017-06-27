@@ -52,14 +52,18 @@ the Stinger project lead at eric.sheridan@owasp.org
 			<pattern>
 				^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&amp;=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$
 			</pattern>
-			<description></description>
+			<description>
+				Basic layout for URLs
+			</description>
 		</regex>
 		<regex>
 			<name>email</name>
 			<pattern>
 				^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$
 			</pattern>
-			<description></description>
+			<description>
+                Basic layout for emails
+            </description>
 		</regex>
 		<regex>
 			<name>safetext</name>
@@ -112,7 +116,9 @@ the Stinger project lead at eric.sheridan@owasp.org
 			<pattern>
 				^((4\d{3})|(5[1-5]\d{2})|(6011))-?\d{4}-?\d{4}-?\d{4}|3[4,7]\d{13}$
 			</pattern>
-			<description></description>
+			<description>
+                Basic format of 4 sets of 4 numbers
+            </description>
 		</regex>
 		<regex>
 			<name>password</name>
@@ -239,10 +245,39 @@ the Stinger project lead at eric.sheridan@owasp.org
 	<!-- Below are the custom rule sets for your application -->
 	<ruleset>
 		<name>Main</name>
-		<path>/basic-text.*</path>
+		<path>/*.*</path>
 
+        <rule>
+            <name>JSESSIONID_box</name>
+            <regex>JSESSIONID</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
 		<rule>
-			<name>entry_box</name>
+			<name>safetext_box</name>
 			<regex>safetext</regex>
 			<exclude>../</exclude>
 
@@ -270,5 +305,324 @@ the Stinger project lead at eric.sheridan@owasp.org
 				<action class="org.owasp.stinger.actions.Forward" />
 			</malformed>
 		</rule>
+        <rule>
+            <name>url_box</name>
+            <regex>url</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>email_box</name>
+            <regex>email</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>digitwords_box</name>
+            <regex>digitwords</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>zip_box</name>
+            <regex>zip</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>phone_box</name>
+            <regex>phone</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>state_box</name>
+            <regex>state</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>date_box</name>
+            <regex>date</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>creditcard_box</name>
+            <regex>creditcard</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>password_box</name>
+            <regex>password</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>ssn_box</name>
+            <regex>ssn</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
+        <rule>
+            <name>monthwords_box</name>
+            <regex>monthwords</regex>
+            <exclude>../</exclude>
+
+            <missing>
+                <severity>continue</severity>
+            </missing>
+            <malformed>
+                <severity>continue</severity>
+                <action class="org.owasp.stinger.actions.Log">
+                    <parameter>
+                        <name>log</name>
+                        <value>stinger.log</value>
+                    </parameter>
+                    <parameter>
+                        <name>level</name>
+                        <value>info</value>
+                    </parameter>
+                    <parameter>
+                        <name>message</name>
+                        <value>
+                            The username parameter from %ip is malformed
+                        </value>
+                    </parameter>
+                </action>
+                <action class="org.owasp.stinger.actions.Forward" />
+            </malformed>
+        </rule>
 	</ruleset>
 </stinger>
