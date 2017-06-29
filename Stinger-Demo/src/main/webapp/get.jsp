@@ -58,7 +58,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <li><p><b>User Input:</b><c:out value="${JSESSIONID_box}" /></p></li>
             </c:if>
 
-            <c:set var="URL_box" value="${param.url_box}" />
+            <c:set var="url_box" value="${param.url_box}" />
             <c:if test="${not empty url_box}">
                 <li><p><b>User Input:</b><c:out value="${url_box}" /></p></li>
             </c:if>
