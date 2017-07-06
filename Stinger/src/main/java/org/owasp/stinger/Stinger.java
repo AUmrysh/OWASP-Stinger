@@ -29,7 +29,6 @@ import org.owasp.stinger.rules.Rule;
 import org.owasp.stinger.rules.RuleSet;
 import org.owasp.stinger.violation.Violation;
 import org.owasp.stinger.violation.ViolationList;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
@@ -43,23 +42,17 @@ import java.util.List;
 import java.util.Map;
 
 public class Stinger {
-	private static final Logger LOGGER = LoggerFactory.getLogger(StingerFilter.class);
+    private static final ch.qos.logback.classic.Logger LOGGER =
+            (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("org.owasp");
 
-
-	private static final int STOP = -1;
+    private static final int STOP = -1;
 	
 	private static final int CONTINUE = 0;
 	
 	private RuleSet set = null;
-	
-	private ServletContext context = null;
-
-	// If you change this, make sure you also update ValidationException.java
-	private static final String REQUEST_DISPATCHER_ERROR_EXCEPTION = "javax.servlet.error.exception";
 
 	public Stinger(RuleSet set, ServletContext context) {
 		this.set = set;
-		this.context = context;
 	}
 	
 	private void handleViolationActions(MutableHttpRequest request, HttpServletResponse response, Violation violation) {
@@ -114,13 +107,13 @@ public class Stinger {
 						vList.add(violation);
 					} else {
 						/** Severity == IGNORE **/
-						LOGGER.debug("[Stinger-Filter] - ignoring missing violation for the " + violation.getName() + " cookie");
+						LOGGER.debug("[Stinger-Filter] ignoring missing violation for the " + violation.getName() + " cookie");
 					}					
 				}
 			}
 		} else {
 			/** There exists no rules for this URI **/
-			LOGGER.warn("[Stinger-Filter] - there exists no rules for the following URI: " + request.getRequestURI());
+			LOGGER.warn("[Stinger-Filter] there exists no rules for the following URI: " + request.getRequestURI());
 		}
 		
 		return retval;
@@ -149,7 +142,7 @@ public class Stinger {
 							vList.add(violation);
 						} else {
 							/** Severity == IGNORE **/
-							LOGGER.debug("[Stinger-Filter] - ignoring malformed violation for the " + violation.getName() + " cookie");
+							LOGGER.debug("[Stinger-Filter] ignoring malformed violation for the " + violation.getName() + " cookie");
 						}
 					}
 				}	
@@ -182,7 +175,7 @@ public class Stinger {
 						vList.add(violation);
 					} else {
 						/** Severity == IGNORE **/
-						LOGGER.debug("[Stinger-Filter] - ignoring missing violation for the " + violation.getName() + " parameter at " + request.getRequestURI());
+						LOGGER.debug("[Stinger-Filter] ignoring missing violation for the " + violation.getName() + " parameter at " + request.getRequestURI());
 					}
 				}
 			}
@@ -208,7 +201,7 @@ public class Stinger {
 //            try{
 //			    value = URLDecoder.decode(value, "UTF-8");
 //            } catch (UnsupportedEncodingException uee){
-//                context.log("[Stinger-Filter] - UnsupportedEncodingException in Stinger.checkMalformedParamters");
+//                logger.error("[Stinger-Filter] - UnsupportedEncodingException in Stinger.checkMalformedParamters");
 //            }
 
             for (String value : values) {
@@ -223,7 +216,7 @@ public class Stinger {
                         vList.add(violation);
                     } else {
                         /** Severity == IGNORE **/
-						LOGGER.debug("[Stinger-Filter] - ignoring malformed violation for the " + violation.getName() + " parameter at " + request.getRequestURI());
+						LOGGER.debug("[Stinger-Filter] ignoring malformed violation for the " + violation.getName() + " parameter at " + request.getRequestURI());
                     }
                 }
             }
@@ -263,14 +256,14 @@ public class Stinger {
 	}
 	
 	public int validate(MutableHttpRequest request, HttpServletResponse response) {
-		int retval = -1;
+		int returnValue = -1;
 		
 		if(set.isExcluded(request.getRequestURI())) {
-			retval = CONTINUE;
+            returnValue = CONTINUE;
 		} else {
-			retval = doValidate(request, response);
+            returnValue = doValidate(request, response);
 		}
 		
-		return retval;
+		return returnValue;
 	}
 }

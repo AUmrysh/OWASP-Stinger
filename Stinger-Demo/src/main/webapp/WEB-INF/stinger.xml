@@ -13,7 +13,7 @@ Defaults:
 
 Cookies:
 1. You must specify a created page for a cookie rule
-2. If a cookie is missing on the created page, then no vioaltion
+2. If a cookie is missing on the created page, then no violation
 3. If a cookie is malformed on the created page, then violation
 4. You must specify at least one enforced uri per cookie rule
 5. You can specify more than one enforced uri per cookie rule
@@ -207,7 +207,7 @@ the Stinger project lead at eric.sheridan@owasp.org
 
 	<!-- **** PARAMETERS **** -->
 
-	<!-- The default parameter rule set must exist -->
+	<!-- The %name parameter with value %value rule set must exist -->
 	<ruleset>
 		<name>STINGER_DEFAULT</name>
 		<!-- The path MUST be set to STINGER_DEFAULT -->
@@ -229,7 +229,7 @@ the Stinger project lead at eric.sheridan@owasp.org
 					</parameter>
 					<parameter>
 						<name>level</name>
-						<value>info</value>
+						<value>trace</value>
 					</parameter>
 					<parameter>
 						<name>message</name>
@@ -264,12 +264,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -293,12 +293,12 @@ the Stinger project lead at eric.sheridan@owasp.org
 					</parameter>
 					<parameter>
 						<name>level</name>
-						<value>info</value>
+						<value>trace</value>
 					</parameter>
 					<parameter>
 						<name>message</name>
 						<value>
-							The username parameter from %ip is malformed
+							The %name parameter with value %value from %ip is malformed
 						</value>
 					</parameter>
 				</action>
@@ -322,12 +322,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -351,12 +351,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -380,12 +380,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -409,12 +409,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -438,12 +438,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -467,12 +467,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -496,12 +496,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -525,12 +525,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -554,12 +554,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -583,12 +583,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
@@ -612,12 +612,12 @@ the Stinger project lead at eric.sheridan@owasp.org
                     </parameter>
                     <parameter>
                         <name>level</name>
-                        <value>info</value>
+                        <value>trace</value>
                     </parameter>
                     <parameter>
                         <name>message</name>
                         <value>
-                            The username parameter from %ip is malformed
+                            The %name parameter with value %value from %ip is malformed
                         </value>
                     </parameter>
                 </action>
