@@ -29,7 +29,7 @@ public class PostDemoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
 
-        request.getRequestDispatcher("/post.html").forward(request, response);
+        request.getRequestDispatcher("/postIntro.jsp").forward(request, response);
 
 
     }
