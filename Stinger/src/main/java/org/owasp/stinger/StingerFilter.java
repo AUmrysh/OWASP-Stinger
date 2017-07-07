@@ -37,8 +37,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.owasp.stinger.http.MutableHttpRequest;
 import org.owasp.stinger.rules.RuleSet;
 import org.owasp.stinger.actions.AbstractAction;
+import org.slf4j.LoggerFactory;
 
 public class StingerFilter implements Filter {
+
+	private static final ch.qos.logback.classic.Logger logger =
+			(ch.qos.logback.classic.Logger) LoggerFactory.getLogger("org.owasp");
 	
 	private final static String POST = "POST";
 	
@@ -65,7 +69,9 @@ public class StingerFilter implements Filter {
 		config = webINF + filterConfig.getInitParameter("config");
 		File configFile = new File(config);
 		
-		if(!configFile.exists() || !configFile.isFile()) context.log("[Stinger-Filter] (Error): unable to locate " + config + ". Attempting " + configFile.getAbsolutePath()); 
+		if(!configFile.exists() || !configFile.isFile()) {
+			logger.info("[Stinger-Filter] (Error): unable to locate " + config + ". Attempting " + configFile.getAbsolutePath());
+		}
 		
 		/** Error page to display when exceptions are thrown **/
 		errorPage = filterConfig.getInitParameter("error-page");
@@ -76,8 +82,8 @@ public class StingerFilter implements Filter {
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
-		MutableHttpRequest mRequest = null;
-		HttpServletResponse hResponse = null;
+		MutableHttpRequest mRequest;
+		HttpServletResponse hResponse;
 		
 		if(request instanceof HttpServletRequest && response instanceof HttpServletResponse) {
 			mRequest = new MutableHttpRequest((HttpServletRequest)request);
@@ -88,26 +94,41 @@ public class StingerFilter implements Filter {
 			}
 			
 			try {
-				if(isValidRequest(mRequest)) {
-					doStinger(mRequest, hResponse, chain);
-				} else {
-					context.log("[Stinger-Filter] caught a POST request with an incorrect content type header (" + mRequest.getContentType() + ") . Redirected to error page at " + errorPage);
-					hResponse.sendRedirect(errorPage);
-				}
+                if (isValidRequest(mRequest)) {
+                    doStinger(mRequest, hResponse, chain);
+                } else {
+                    logger.debug("[Stinger-Filter] caught a POST request with an incorrect content type header (" + mRequest.getContentType() + ") . Redirected to error page at " + errorPage);
+
+                    redirect(hResponse);
+
+                }
+            } catch(NullPointerException npe) {
+                logger.error("[Stinger-Filter] Generic Error Thrown in doFilter ", npe.fillInStackTrace());
+
+                redirect(hResponse);
+
 			} catch(Exception e) {
-				context.log("[Stinger-Filter] - " + e.getMessage(), e);
-				
-				try {
-					hResponse.sendRedirect(errorPage);
-				} catch (Exception ee) {
-					context.log("[Stinger-Filter] error attempting to redirect to " + errorPage, ee);
-				}
-			}
+				logger.error("[Stinger-Filter] Generic Error Thrown in doFilter " +
+					mRequest + " : " +
+					hResponse + " : " +
+					chain);
+
+                redirect(hResponse);
+            }
 		}
 	}
-	
+
+	private void redirect(HttpServletResponse hResponse) {
+		try {
+			hResponse.sendRedirect(errorPage);
+		} catch (Exception ee) {
+			logger.error("[Stinger-Filter] error attempting to redirect to " + errorPage, ee);
+		}
+	}
+
+
 	public void destroy() {
-		
+
 	}
 	
 	/**
@@ -138,9 +159,9 @@ public class StingerFilter implements Filter {
 	
 	private void doStinger(MutableHttpRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		int retval = stinger.validate(request, response);
+		int returnValue = stinger.validate(request, response);
 		
-		switch(retval) {
+		switch(returnValue) {
 			case AbstractAction.CONTINUE:
 			case AbstractAction.PROCESS:
 				chain.doFilter(request, response);

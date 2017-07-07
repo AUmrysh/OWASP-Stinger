@@ -19,11 +19,12 @@
 	</licenses>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<servlet-api.version>2.5</servlet-api.version>
+		<servlet-api.version>3.1.0</servlet-api.version>
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<taglibs.standard.version>1.1.2</taglibs.standard.version>
 		<logback-classic.version>1.2.3</logback-classic.version>
+		<slf4j-api.version>1.7.21</slf4j-api.version>
 	</properties>
 
 
@@ -32,7 +33,7 @@
 		<!-- Enables the use of java servlets -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
@@ -71,6 +72,12 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback-classic.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
 		</dependency>
 
 	</dependencies>

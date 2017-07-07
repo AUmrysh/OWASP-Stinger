@@ -27,28 +27,25 @@ import org.owasp.stinger.util.CryptoException;
 import org.owasp.stinger.util.CryptoUtil;
 import org.owasp.stinger.util.Encoder;
 import org.owasp.stinger.violation.Violation;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Log extends AbstractAction {
-	
-	private static Logger logger = Logger.getLogger("org.owasp.stinger.actions.Log");
+
+	private static final ch.qos.logback.classic.Logger logger =
+			(ch.qos.logback.classic.Logger) LoggerFactory.getLogger("org.owasp");
 	
 	private static FileHandler handler = null;
-	
+
 	private ServletContext context = null;
 	
 	public Log() {
 		
 	}
-	
+
 	public void init(ServletContext context) {
 		this.context = context;
 	}
@@ -100,15 +97,15 @@ public class Log extends AbstractAction {
 			try {
 				b = CryptoUtil.doWeakHash(s.getBytes());
 			} catch (CryptoException e) {
-				context.log("[Stinger-Filter] caught crypto exception in doAction", e);
+				logger.error("[Stinger-Filter] caught crypto exception in doAction", e);
 			}
 			
 			message = message.replace("%js", Encoder.BASE64Encode(b));
 		} else {
 			message = message.replace("%js", "NULL");
 		}
-		
-		logger.log(new LogRecord(Level.parse(level.toUpperCase()), message));
+
+		logger.trace(level.toUpperCase(), message);
 		
 		return CONTINUE;
 	}
@@ -121,7 +118,7 @@ public class Log extends AbstractAction {
 		try {
 			l = Integer.parseInt(limit);
 		} catch (NumberFormatException e) {
-			context.log("[Stinger-Filter] getHandler: " + l + " is not a valid int, defaulting to " + (1024*1024));
+			logger.debug("[Stinger-Filter] getHandler: " + l + " is not a valid int, defaulting to " + (1024*1024));
 			
 			l = 1024*1024;
 		}
@@ -129,7 +126,7 @@ public class Log extends AbstractAction {
 		try {
 			c = Integer.parseInt(count);
 		} catch (NumberFormatException e) {
-			context.log("[Stinger-Filter] getHandler: " + count + " is not a valid int, defaulting to 1");
+			logger.debug("[Stinger-Filter] getHandler: " + count + " is not a valid int, defaulting to 1");
 			
 			c = 1;
 		}
@@ -146,7 +143,7 @@ public class Log extends AbstractAction {
 				handler = new FileHandler(log, limit, count, append);
 			}
 		} catch (IOException ioe) {
-			context.log("[Stinger-Filter] exception in getHandler", ioe);
+			logger.error("[Stinger-Filter] exception in getHandler", ioe);
 		}
 	}
 }

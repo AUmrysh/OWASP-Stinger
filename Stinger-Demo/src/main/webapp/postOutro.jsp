@@ -20,7 +20,7 @@
                 <a href="index.html" class="w3-bar-item w3-button w3-theme-l1">OWASP</a>
                 <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
                 <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Manual</a>
-                <a href="demo.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Demo</a>
+                <a href="demo" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Demo</a>
 
             </div>
         </div>

@@ -23,9 +23,9 @@ public class Forward extends AbstractAction {
 		try {
 			request.getRequestDispatcher(page).forward(request, response);
 		} catch (IOException ioe) {
-			context.log("[Stinger-Filter] exception in doAction", ioe);
+			context.log("[Stinger-Filter] IO exception in doAction", ioe);
 		} catch (ServletException se) {
-			context.log("[Stinger-Filter] exception in doAction", se);
+			context.log("[Stinger-Filter] Servlet exception in doAction", se);
 		}
 		
 		return PROCESS;
